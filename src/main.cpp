@@ -1,7 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <stdio.h>
-#include <util.h>
+#include <util.hpp>
 
 // Vertex Shader source code
 const char *vertexShaderSource = "#version 330 core\n"

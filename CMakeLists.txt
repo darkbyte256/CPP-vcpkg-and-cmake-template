@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(App C)
+project(App CXX)
 
 # Set Policy CMP0072 to NEW to use the modern GLVND libraries (removes that warning)
 cmake_policy(SET CMP0072 NEW)
@@ -12,8 +12,8 @@ find_package(OpenGL REQUIRED)
 include_directories(include)
 
 set(SOURCES 
-    src/main.c
-    src/util.c)
+    src/main.cpp
+    src/util.cpp)
 
 # 2. Add your executable
 add_executable(app ${SOURCES})
