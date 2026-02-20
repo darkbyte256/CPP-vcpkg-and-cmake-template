@@ -9,7 +9,6 @@ This repository standardizes the development lifecycle for C++ projects. It leve
 ### Key Features
 - **Modern C++ Standards:** Pre-configured for **C++20/C++23** to utilize concepts, ranges, and modules.
 - **Reproducible Dependencies:** Uses `vcpkg.json` to lock library versions and simplify setup.
-- **Clang++ Integration:** Optimized for `clang++` to benefit from advanced diagnostics and memory sanitizers.
 - **Production-Ready Scripts:** Includes automated bootstrapping for vcpkg and clean-build workflows.
 - **Graphics Smoke-Test:** Includes a minimal OpenGL implementation to verify that the C++ compiler, linker, and graphics drivers are correctly configured.
 
