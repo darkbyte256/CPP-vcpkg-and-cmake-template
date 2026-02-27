@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 project(App CXX)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 # Set Policy CMP0072 to NEW to use the modern GLVND libraries
 cmake_policy(SET CMP0072 NEW)
 
