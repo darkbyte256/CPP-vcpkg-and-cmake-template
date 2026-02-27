@@ -3,6 +3,19 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Defaults to Debug if no argument is provided
+BUILD_TYPE="Debug"
+if [ "$1" == "release" ]; then
+    BUILD_TYPE="Release"
+fi
+
+echo "--- Building in ${BUILD_TYPE} mode ---"
+if [ "$BUILD_TYPE" == "Debug" ]; then
+    echo "--- (Sanitizers and Debug symbols enabled) ---"
+else
+    echo "--- (Hardening and O2 optimizations enabled) ---"
+fi
+
 # --- Git Submodule Check ---
 if [ ! -f "vcpkg/README.md" ]; then
     echo "--- vcpkg not found. Initializing submodules... ---"
@@ -20,6 +33,11 @@ fi
 VCPKG_PATH="./vcpkg/scripts/buildsystems/vcpkg.cmake"
 BUILD_DIR="build"
 
+if [ -d "$BUILD_DIR" ]; then
+    echo "--- Cleaning old build artifacts ---"
+    rm -rf "$BUILD_DIR"
+fi
+
 # Check if vcpkg toolchain exists
 if [ ! -f "$VCPKG_PATH" ]; then
     echo "Error: vcpkg toolchain not found at $VCPKG_PATH"
@@ -27,20 +45,19 @@ if [ ! -f "$VCPKG_PATH" ]; then
     exit 1
 fi
 
-# 1. Create build directory if it doesn't exist
-if [ ! -d "$BUILD_DIR" ]; then
-    echo "--- Creating build directory ---"
-    mkdir "$BUILD_DIR"
-fi
+# 1. Create build directory
+echo "--- Creating build directory ---"
+mkdir "$BUILD_DIR"
 
 # 2. Enter build directory
 cd "$BUILD_DIR"
 
 # 3. Configure the project with CMake
-echo "--- Configuring Project with Clang and vcpkg ---"
+echo "--- Configuring Project with gcc and vcpkg ---"
 cmake .. \
-    -DCMAKE_C_COMPILER=clang \
-    -DCMAKE_TOOLCHAIN_FILE="../$VCPKG_PATH"
+    -DCMAKE_CXX_COMPILER=g++ \
+    -DCMAKE_TOOLCHAIN_FILE="../$VCPKG_PATH" \
+    -DCMAKE_BUILD_TYPE="$BUILD_TYPE"
 
 # 4. Build the application
 echo "--- Building Application ---"
