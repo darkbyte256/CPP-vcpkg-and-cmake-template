@@ -29,7 +29,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 ${SEC_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} ${LD_FLAGS}")
 
 # Debug: Bug Catching (Sanitizers)
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -Og -Wall -Wextra -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -D_GLIBCXX_ASSERTIONS")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -Og -Wall -Wextra -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -fanalyzer -D_GLIBCXX_DEBUG")
 
 # 2. Add your executable
 add_executable(app ${SOURCES})
